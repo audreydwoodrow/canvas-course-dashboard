@@ -168,6 +168,15 @@ input, select, textarea {
   color: var(--color-text);
 }
 
+input[type="checkbox"] {
+  all: revert;
+  width: 17px;
+  height: 17px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 /* ============================================================
    LISTS (announcements / grades / todos)
    ============================================================ */
