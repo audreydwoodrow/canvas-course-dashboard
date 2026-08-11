@@ -19,3 +19,42 @@ Dashboard running at http://127.0.0.1:5050
 127.0.0.1 - - [11/Aug/2026 14:12:46] "GET /api/setup HTTP/1.1" 200 -
 127.0.0.1 - - [11/Aug/2026 14:12:47] "GET /api/calendar/events HTTP/1.1" 200 -
 127.0.0.1 - - [11/Aug/2026 14:12:47] "GET /api/announcements HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET / HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET /js/announcements.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET /js/api.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET /js/calendar.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET /js/grades.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "[36mGET /js/todos.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "GET /api/grades HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:14] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:15] "GET /api/calendar/events HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:16] "GET /api/announcements HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET / HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET /js/api.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET /js/calendar.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET /js/todos.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET /js/announcements.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "[36mGET /js/grades.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "GET /api/grades HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:21] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:22] "GET /api/calendar/events HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:15:22] "GET /api/announcements HTTP/1.1" 200 -
+Dashboard running at http://127.0.0.1:5050
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [11/Aug/2026 14:19:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:19:03] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:19:03] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:19:19] "GET /js/weekly.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:19:19] "GET /js/main.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:19:19] "GET /js/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:19:19] "GET /css/styles.css HTTP/1.1" 200 -

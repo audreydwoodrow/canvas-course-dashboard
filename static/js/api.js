@@ -28,4 +28,9 @@ export const api = {
   createTodo: (todo) => request("/api/todos", { method: "POST", body: JSON.stringify(todo) }),
   updateTodo: (id, todo) => request(`/api/todos/${id}`, { method: "PUT", body: JSON.stringify(todo) }),
   deleteTodo: (id) => request(`/api/todos/${id}`, { method: "DELETE" }),
+
+  getWeeklyTodos: () => request("/api/weekly-todos"),
+  createWeeklyTodo: (task) => request("/api/weekly-todos", { method: "POST", body: JSON.stringify(task) }),
+  updateWeeklyTodo: (id, task) => request(`/api/weekly-todos/${id}`, { method: "PUT", body: JSON.stringify(task) }),
+  deleteWeeklyTodo: (id) => request(`/api/weekly-todos/${id}`, { method: "DELETE" }),
 };

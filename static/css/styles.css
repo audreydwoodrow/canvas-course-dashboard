@@ -72,9 +72,30 @@ h1, h2, h3 { margin: 0; }
 
 .header-actions { display: flex; gap: var(--space-sm); }
 
+.tab-nav { display: flex; gap: var(--space-xs); }
+
+.tab-btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-text-muted);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.tab-btn:hover { color: var(--color-text); }
+
+.tab-btn.active {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  font-weight: 600;
+}
+
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: minmax(0, 3fr) 320px;
   gap: var(--space-lg);
   padding: var(--space-lg);
   align-items: start;
@@ -98,7 +119,7 @@ h1, h2, h3 { margin: 0; }
   padding: var(--space-md);
 }
 
-.calendar-panel { min-height: 600px; }
+.calendar-panel { min-height: 850px; }
 
 .panel-header {
   display: flex;
@@ -198,6 +219,63 @@ input, select, textarea {
 .modal-actions { display: flex; justify-content: flex-end; gap: var(--space-sm); margin-top: var(--space-sm); }
 
 .error { color: var(--color-danger); font-size: 0.85rem; }
+
+/* ============================================================
+   WEEKLY TO-DOS
+   ============================================================ */
+#weekly-view { padding: var(--space-lg); }
+
+.weekly-header { margin-bottom: var(--space-md); }
+
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) minmax(0, 1.15fr);
+  gap: var(--space-md);
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .weekly-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.weekly-col {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-sm);
+  min-height: 220px;
+}
+
+.weekly-col-horizon {
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface));
+}
+
+.weekly-col-header { margin-bottom: var(--space-sm); }
+.weekly-col-title { font-weight: 700; font-size: 0.9rem; }
+.weekly-col-subtitle { color: var(--color-text-muted); font-size: 0.72rem; }
+
+.weekly-add-form { margin-bottom: var(--space-sm); }
+.weekly-add-form input {
+  width: 100%;
+  font-size: 0.82rem;
+  padding: 5px 8px;
+}
+
+.weekly-list { display: flex; flex-direction: column; gap: 6px; }
+
+.weekly-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 5px 7px;
+}
+
+.weekly-item.done .weekly-item-title { text-decoration: line-through; color: var(--color-todo-done); }
+.weekly-item-title { flex: 1; font-size: 0.83rem; word-break: break-word; }
 
 /* FullCalendar theming to match the palette */
 .fc { font-family: var(--font-sans); }

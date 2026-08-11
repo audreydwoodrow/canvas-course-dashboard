@@ -11,13 +11,17 @@
 <div id="app">
   <header class="app-header">
     <h1>Dashboard</h1>
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="calendar-view">Calendar</button>
+      <button class="tab-btn" data-tab="weekly-view">Weekly To-Dos</button>
+    </nav>
     <div class="header-actions">
       <button id="refresh-btn" class="btn btn-ghost" title="Refresh Canvas data">Refresh</button>
       <button id="settings-btn" class="btn btn-ghost" title="Settings">Settings</button>
     </div>
   </header>
 
-  <main class="layout">
+  <main id="calendar-view" class="layout tab-view">
     <section class="panel calendar-panel">
       <div id="calendar"></div>
     </section>
@@ -51,6 +55,13 @@
       </section>
     </aside>
   </main>
+
+  <section id="weekly-view" class="tab-view" hidden>
+    <div class="weekly-header">
+      <h2 id="weekly-range"></h2>
+    </div>
+    <div id="weekly-grid" class="weekly-grid"></div>
+  </section>
 </div>
 
 <dialog id="setup-modal" class="modal">

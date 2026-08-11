@@ -1,8 +1,16 @@
 export function initCalendar(el, events) {
   const calendar = new window.FullCalendar.Calendar(el, {
-    initialView: "dayGridMonth",
-    height: "auto",
-    headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,listMonth" },
+    initialView: "timeGridWeek",
+    height: 850,
+    slotMinTime: "00:00:00",
+    slotMaxTime: "24:00:00",
+    scrollTime: "08:00:00",
+    nowIndicator: true,
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "timeGridWeek,dayGridMonth",
+    },
     events: events.map(toFullCalendarEvent),
     eventClick(info) {
       if (info.event.url) {

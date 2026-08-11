@@ -3,6 +3,7 @@ import { initCalendar, setCalendarEvents } from "./calendar.js";
 import { renderAnnouncements } from "./announcements.js";
 import { renderGrades } from "./grades.js";
 import { renderTodos } from "./todos.js";
+import { renderWeeklyView } from "./weekly.js";
 
 const setupModal = document.getElementById("setup-modal");
 const setupForm = document.getElementById("setup-form");
@@ -54,6 +55,24 @@ async function loadTodos() {
 async function loadCalendarOnly() {
   const events = await api.getEvents();
   if (calendar) setCalendarEvents(calendar, events);
+}
+
+async function loadWeekly() {
+  const data = await api.getWeeklyTodos();
+  renderWeeklyView(document.getElementById("weekly-grid"), document.getElementById("weekly-range"), data, {
+    onAdd: async (day, title) => {
+      await api.createWeeklyTodo({ day, title });
+      loadWeekly();
+    },
+    onToggle: async (id, done) => {
+      await api.updateWeeklyTodo(id, { done });
+      loadWeekly();
+    },
+    onRemove: async (id) => {
+      await api.deleteWeeklyTodo(id);
+      loadWeekly();
+    },
+  });
 }
 
 function openGradeModal(grade) {
@@ -113,6 +132,18 @@ document.getElementById("refresh-btn").addEventListener("click", () => {
   loadCanvasData();
   loadGrades();
   loadTodos();
+  loadWeekly();
+});
+
+document.querySelectorAll(".tab-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const target = btn.dataset.tab;
+    document.querySelectorAll(".tab-view").forEach((view) => {
+      view.hidden = view.id !== target;
+    });
+  });
 });
 
 document.getElementById("settings-btn").addEventListener("click", () => openSetupModal());
@@ -145,6 +176,7 @@ setupForm.addEventListener("submit", async (evt) => {
 async function init() {
   await loadTodos();
   await loadGrades();
+  await loadWeekly();
 
   const status = await api.getSetupStatus();
   if (!status.configured) {
