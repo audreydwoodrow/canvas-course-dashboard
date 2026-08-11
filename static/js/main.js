@@ -70,12 +70,20 @@ async function loadWeekly() {
       await api.createWeeklyTodo({ day, title });
       loadWeekly();
     },
+    onAddSub: async (parentId, title) => {
+      await api.createWeeklyTodo({ parent_id: parentId, title });
+      loadWeekly();
+    },
     onToggle: async (id, done) => {
       await api.updateWeeklyTodo(id, { done });
       loadWeekly();
     },
     onRemove: async (id) => {
       await api.deleteWeeklyTodo(id);
+      loadWeekly();
+    },
+    onReorder: async (ids) => {
+      await api.reorderWeeklyTodos(ids);
       loadWeekly();
     },
   });

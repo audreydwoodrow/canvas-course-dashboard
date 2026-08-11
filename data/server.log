@@ -158,3 +158,229 @@ Dashboard running at http://127.0.0.1:5050
 [33mPress CTRL+C to quit[0m
 127.0.0.1 - - [11/Aug/2026 14:29:13] "GET / HTTP/1.1" 200 -
 127.0.0.1 - - [11/Aug/2026 14:29:13] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET /css/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET /js/main.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "[36mGET /js/api.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "[36mGET /js/announcements.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "[36mGET /js/calendar.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET /js/weekly.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "[36mGET /js/grades.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "[36mGET /js/todos.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET /api/grades HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:46] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:47] "GET /api/calendar/events HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:47] "GET /api/announcements HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:53] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 14:29:53] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:59] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 14:29:59] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:30:02] "[35m[1mDELETE /api/weekly-todos/7 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 14:30:02] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:30:03] "[35m[1mDELETE /api/weekly-todos/6 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 14:30:03] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:34:50] "[35m[1mPOST /api/todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 14:34:50] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:34:51] "GET /api/calendar/events HTTP/1.1" 200 -
+[2026-08-11 14:35:00,338] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:00] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:01,517] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:01] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:02,504] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:02] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:03,314] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:03] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:03,496] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:03] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:03,647] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:03] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:05,046] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:05] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:05,205] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:05] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:05,355] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:05] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:05,505] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:05] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:05,625] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:05] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+[2026-08-11 14:35:05,781] ERROR in app: Exception on /api/todos/1 [DELETE]
+Traceback (most recent call last):
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/audreywoodrow/school-dashboard/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/audreywoodrow/school-dashboard/routes/todos.py", line 66, in delete_todo
+    db.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: todos
+127.0.0.1 - - [11/Aug/2026 14:35:05] "[35m[1mDELETE /api/todos/1 HTTP/1.1[0m" 500 -
+Dashboard running at http://127.0.0.1:5050
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [11/Aug/2026 14:36:15] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:36:15] "GET /api/weekly-todos HTTP/1.1" 200 -

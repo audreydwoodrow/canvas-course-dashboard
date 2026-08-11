@@ -34,9 +34,17 @@ CREATE TABLE IF NOT EXISTS weekly_tasks (
     title TEXT NOT NULL,
     done INTEGER NOT NULL DEFAULT 0,
     week_start TEXT,
+    parent_id INTEGER,
+    position INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 """
+
+
+def _add_column_if_missing(conn, table, column, coltype):
+    cols = {row[1] for row in conn.execute(f"PRAGMA table_info({table})")}
+    if column not in cols:
+        conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {coltype}")
 
 
 def get_db():
@@ -58,6 +66,8 @@ def init_db(app):
         os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
         conn = sqlite3.connect(DB_PATH)
         conn.executescript(SCHEMA)
+        _add_column_if_missing(conn, "weekly_tasks", "parent_id", "INTEGER")
+        _add_column_if_missing(conn, "weekly_tasks", "position", "INTEGER NOT NULL DEFAULT 0")
         conn.commit()
         conn.close()
     app.teardown_appcontext(close_db)

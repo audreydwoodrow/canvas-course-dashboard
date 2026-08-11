@@ -275,17 +275,44 @@ input[type="checkbox"] {
 
 .weekly-list { display: flex; flex-direction: column; gap: 6px; }
 
+.weekly-task, .weekly-subtask { cursor: grab; }
+.weekly-task.dragging, .weekly-subtask.dragging { opacity: 0.4; }
+.weekly-task:active, .weekly-subtask:active { cursor: grabbing; }
+
 .weekly-item {
   display: flex;
   align-items: flex-start;
   gap: 6px;
   border: 1px solid var(--color-border);
+  background: var(--color-surface);
   border-radius: var(--radius-sm);
   padding: 5px 7px;
 }
 
 .weekly-item.done .weekly-item-title { text-decoration: line-through; color: var(--color-todo-done); }
 .weekly-item-title { flex: 1; font-size: 0.83rem; word-break: break-word; }
+
+/* Subtasks: indented, smaller, one level deep */
+.weekly-subtask-list {
+  margin: 4px 0 2px 14px;
+  padding-left: 10px;
+  border-left: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.weekly-item-sub { padding: 3px 6px; }
+.weekly-item-sub .weekly-item-title { font-size: 0.76rem; }
+
+.weekly-add-subtask-form input {
+  width: 100%;
+  font-size: 0.74rem;
+  padding: 3px 6px;
+  border: 1px dashed var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+}
 
 /* Horizon: its own full-width panel below the week, so it doesn't squeeze the day columns */
 .weekly-horizon-panel {
@@ -306,17 +333,7 @@ input[type="checkbox"] {
 
 .weekly-horizon-panel .weekly-add-form { max-width: 360px; }
 
-.weekly-horizon-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-}
-
-.weekly-horizon-list .weekly-item {
-  flex: 1 1 220px;
-  max-width: 320px;
-  background: var(--color-surface);
-}
+.weekly-horizon-list .weekly-task { max-width: 480px; }
 
 /* FullCalendar theming to match the palette */
 .fc { font-family: var(--font-sans); }
