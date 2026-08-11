@@ -509,3 +509,26 @@ Dashboard running at http://127.0.0.1:5050
  * Running on http://127.0.0.1:5050
 [33mPress CTRL+C to quit[0m
 127.0.0.1 - - [11/Aug/2026 15:04:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /css/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /js/main.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /js/api.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /js/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /js/grades.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /js/announcements.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /js/todos.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /js/weekly.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /api/grades HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:34] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:35] "GET /api/calendar/events HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:06:35] "GET /api/announcements HTTP/1.1" 200 -
+Dashboard running at http://127.0.0.1:5050
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [11/Aug/2026 15:10:14] "GET / HTTP/1.1" 200 -
