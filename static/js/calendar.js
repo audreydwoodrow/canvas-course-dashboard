@@ -1,6 +1,6 @@
 export function initCalendar(el, events) {
   const calendar = new window.FullCalendar.Calendar(el, {
-    initialView: "timeGridWeek",
+    initialView: "dayGridMonth",
     height: 850,
     slotMinTime: "00:00:00",
     slotMaxTime: "24:00:00",
@@ -9,7 +9,7 @@ export function initCalendar(el, events) {
     headerToolbar: {
       left: "prev,next today",
       center: "title",
-      right: "timeGridWeek,dayGridMonth",
+      right: "dayGridMonth,timeGridWeek",
     },
     events: events.map(toFullCalendarEvent),
     eventClick(info) {

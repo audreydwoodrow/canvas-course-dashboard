@@ -72,6 +72,8 @@ h1, h2, h3 { margin: 0; }
 
 .header-actions { display: flex; gap: var(--space-sm); }
 
+.tab-view[hidden] { display: none !important; }
+
 .tab-nav { display: flex; gap: var(--space-xs); }
 
 .tab-btn {
