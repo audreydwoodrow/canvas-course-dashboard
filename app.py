@@ -1,6 +1,3 @@
-import threading
-import webbrowser
-
 from flask import Flask
 
 from db import init_db
@@ -30,7 +27,5 @@ def create_app():
 app = create_app()
 
 if __name__ == "__main__":
-    url = f"http://{HOST}:{PORT}"
-    threading.Timer(1.0, lambda: webbrowser.open(url)).start()
-    print(f"Dashboard running at {url}")
+    print(f"Dashboard running at http://{HOST}:{PORT}")
     app.run(host=HOST, port=PORT, debug=False)
