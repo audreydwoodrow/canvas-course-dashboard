@@ -59,7 +59,13 @@ async function loadCalendarOnly() {
 
 async function loadWeekly() {
   const data = await api.getWeeklyTodos();
-  renderWeeklyView(document.getElementById("weekly-grid"), document.getElementById("weekly-range"), data, {
+  const els = {
+    gridEl: document.getElementById("weekly-grid"),
+    horizonListEl: document.getElementById("weekly-horizon-list"),
+    horizonFormEl: document.getElementById("horizon-add-form"),
+    rangeEl: document.getElementById("weekly-range"),
+  };
+  renderWeeklyView(els, data, {
     onAdd: async (day, title) => {
       await api.createWeeklyTodo({ day, title });
       loadWeekly();

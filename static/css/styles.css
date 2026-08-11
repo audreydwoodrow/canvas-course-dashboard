@@ -240,12 +240,16 @@ input[type="checkbox"] {
 
 .weekly-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr)) minmax(0, 1.15fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: var(--space-md);
   align-items: start;
 }
 
 @media (max-width: 1100px) {
+  .weekly-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
   .weekly-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -254,13 +258,8 @@ input[type="checkbox"] {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  padding: var(--space-sm);
-  min-height: 220px;
-}
-
-.weekly-col-horizon {
-  border-color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface));
+  padding: var(--space-md);
+  min-height: 260px;
 }
 
 .weekly-col-header { margin-bottom: var(--space-sm); }
@@ -287,6 +286,37 @@ input[type="checkbox"] {
 
 .weekly-item.done .weekly-item-title { text-decoration: line-through; color: var(--color-todo-done); }
 .weekly-item-title { flex: 1; font-size: 0.83rem; word-break: break-word; }
+
+/* Horizon: its own full-width panel below the week, so it doesn't squeeze the day columns */
+.weekly-horizon-panel {
+  margin-top: var(--space-lg);
+  background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface));
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+}
+
+.weekly-horizon-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.weekly-horizon-panel .weekly-add-form { max-width: 360px; }
+
+.weekly-horizon-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.weekly-horizon-list .weekly-item {
+  flex: 1 1 220px;
+  max-width: 320px;
+  background: var(--color-surface);
+}
 
 /* FullCalendar theming to match the palette */
 .fc { font-family: var(--font-sans); }

@@ -107,3 +107,54 @@ Dashboard running at http://127.0.0.1:5050
  * Running on http://127.0.0.1:5050
 [33mPress CTRL+C to quit[0m
 127.0.0.1 - - [11/Aug/2026 14:24:40] "GET /css/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET / HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "GET /css/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET /js/api.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET /js/grades.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET /js/announcements.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET /js/calendar.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET /js/weekly.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "[36mGET /js/todos.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "GET /api/grades HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:31] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:32] "GET /api/calendar/events HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:33] "GET /api/announcements HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:39] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 14:26:39] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:41] "PUT /api/weekly-todos/2 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:41] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:42] "PUT /api/weekly-todos/2 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:42] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:44] "PUT /api/weekly-todos/2 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:44] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:44] "PUT /api/weekly-todos/2 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:44] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:45] "PUT /api/weekly-todos/2 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:45] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:46] "PUT /api/weekly-todos/2 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:46] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:26:58] "[35m[1mDELETE /api/weekly-todos/2 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 14:26:58] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:28:19] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 14:28:19] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:28:23] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 14:28:23] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:28:26] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 14:28:26] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:28:28] "[35m[1mDELETE /api/weekly-todos/5 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 14:28:28] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:28:29] "[35m[1mDELETE /api/weekly-todos/4 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 14:28:29] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:28:31] "[35m[1mDELETE /api/weekly-todos/3 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 14:28:31] "GET /api/weekly-todos HTTP/1.1" 200 -
+Dashboard running at http://127.0.0.1:5050
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [11/Aug/2026 14:29:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 14:29:13] "GET /api/weekly-todos HTTP/1.1" 200 -
