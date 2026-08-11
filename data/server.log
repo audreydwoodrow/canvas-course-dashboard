@@ -532,3 +532,94 @@ Dashboard running at http://127.0.0.1:5050
  * Running on http://127.0.0.1:5050
 [33mPress CTRL+C to quit[0m
 127.0.0.1 - - [11/Aug/2026 15:10:14] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:08] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:11:08] "GET /css/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "[36mGET /js/calendar.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "[36mGET /js/todos.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "[36mGET /js/weekly.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "[36mGET /js/api.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "[36mGET /js/announcements.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "[36mGET /js/grades.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "GET /api/grades HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:09] "GET /api/calendar/events HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:10] "GET /api/announcements HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:27] "[35m[1mDELETE /api/weekly-todos/4 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:11:27] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:28] "[35m[1mDELETE /api/weekly-todos/5 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:11:28] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:28] "[35m[1mDELETE /api/weekly-todos/3 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:11:28] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:31] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:11:31] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:35] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:11:35] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:44] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:11:44] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:49] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:11:49] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:54] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:11:54] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:11:58] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:11:58] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:05] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:12:05] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:11] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:12:11] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:16] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:12:16] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:20] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:12:20] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:22] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:12:22] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET / HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /js/weekly.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /js/todos.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /js/api.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /js/calendar.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /js/grades.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "[36mGET /js/announcements.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "GET /api/todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "GET /api/grades HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:25] "GET /api/setup HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:26] "GET /api/calendar/events HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:26] "GET /api/announcements HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:32] "[35m[1mDELETE /api/weekly-todos/6 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:32] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:33] "[35m[1mDELETE /api/weekly-todos/9 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:33] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:34] "[35m[1mDELETE /api/weekly-todos/10 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:34] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:35] "PUT /api/weekly-todos/11 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:35] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:39] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:12:39] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:41] "PUT /api/weekly-todos/11 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:41] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:42] "PUT /api/weekly-todos/11 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:42] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:42] "PUT /api/weekly-todos/11 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:42] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:43] "[35m[1mDELETE /api/weekly-todos/17 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:43] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:44] "[35m[1mDELETE /api/weekly-todos/11 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:44] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:45] "[35m[1mDELETE /api/weekly-todos/12 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:45] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:45] "[35m[1mDELETE /api/weekly-todos/13 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:45] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:12:46] "[35m[1mDELETE /api/weekly-todos/14 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:12:46] "GET /api/weekly-todos HTTP/1.1" 200 -
+Dashboard running at http://127.0.0.1:5050
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [11/Aug/2026 15:13:46] "GET / HTTP/1.1" 200 -

@@ -128,6 +128,8 @@ def update_weekly_todo(task_id):
     if updates:
         set_clause = ", ".join(f"{k} = ?" for k in updates)
         db.execute(f"UPDATE weekly_tasks SET {set_clause} WHERE id = ?", (*updates.values(), task_id))
+        if updates.get("done") == 1:
+            db.execute("UPDATE weekly_tasks SET done = 1 WHERE parent_id = ?", (task_id,))
         db.commit()
 
     row = db.execute("SELECT * FROM weekly_tasks WHERE id = ?", (task_id,)).fetchone()
