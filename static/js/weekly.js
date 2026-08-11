@@ -9,13 +9,13 @@ const DAY_LABELS = {
 
 const DAY_ORDER = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday"];
 
-// Explicit expand/collapse choices per task, kept across re-renders within the page session.
-// Tasks with no explicit choice default to expanded only if they already have subtasks.
-const expandState = new Map();
+// Whether the "add a subtask" input is open per task, kept across re-renders within the
+// page session. This only ever controls the add-subtask input — existing subtasks are
+// always visible regardless of this state.
+const addFormState = new Map();
 
-function isExpanded(task) {
-  if (expandState.has(task.id)) return expandState.get(task.id);
-  return (task.subtasks || []).length > 0;
+function isAddFormOpen(taskId) {
+  return addFormState.get(taskId) || false;
 }
 
 export function renderWeeklyView(els, data, handlers) {
@@ -102,12 +102,15 @@ function buildTaskWrapper(task, handlers) {
   wrapper.draggable = true;
   wrapper.dataset.id = task.id;
 
+  // Existing subtasks are always visible — the arrow never affects this list.
   const subList = document.createElement("div");
   subList.className = "weekly-subtask-list";
   for (const sub of task.subtasks || []) {
     subList.appendChild(buildSubtaskWrapper(sub, handlers));
   }
+  enableDragReorder(subList, handlers.onReorder);
 
+  // The arrow only shows/hides this add-subtask input.
   const subForm = document.createElement("form");
   subForm.className = "weekly-add-subtask-form";
   subForm.innerHTML = `<input type="text" placeholder="+ subtask" />`;
@@ -119,29 +122,29 @@ function buildTaskWrapper(task, handlers) {
     handlers.onAddSub(task.id, value);
     input.value = "";
   });
-  subList.appendChild(subForm);
-  enableDragReorder(subList, handlers.onReorder);
 
-  const expanded = isExpanded(task);
-  subList.style.display = expanded ? "flex" : "none";
+  const formOpen = isAddFormOpen(task.id);
+  subForm.style.display = formOpen ? "block" : "none";
 
   const toggle = document.createElement("button");
   toggle.type = "button";
   toggle.className = "weekly-expand-toggle";
-  toggle.textContent = expanded ? "▾" : "▸";
-  toggle.title = "Show/hide subtasks";
+  toggle.textContent = formOpen ? "▴" : "▾";
+  toggle.title = "Add a subtask";
   toggle.addEventListener("click", () => {
-    const next = !isExpanded(task);
-    expandState.set(task.id, next);
-    subList.style.display = next ? "flex" : "none";
-    toggle.textContent = next ? "▾" : "▸";
+    const next = !isAddFormOpen(task.id);
+    addFormState.set(task.id, next);
+    subForm.style.display = next ? "block" : "none";
+    toggle.textContent = next ? "▴" : "▾";
+    if (next) subForm.querySelector("input").focus();
   });
 
   const row = buildItemRow(task, handlers, false);
   row.prepend(toggle);
 
   wrapper.appendChild(row);
-  wrapper.appendChild(subList);
+  if ((task.subtasks || []).length > 0) wrapper.appendChild(subList);
+  wrapper.appendChild(subForm);
   return wrapper;
 }
 
