@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" />
+<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<div id="app">
+  <header class="app-header">
+    <h1>Dashboard</h1>
+    <div class="header-actions">
+      <button id="refresh-btn" class="btn btn-ghost" title="Refresh Canvas data">Refresh</button>
+      <button id="settings-btn" class="btn btn-ghost" title="Settings">Settings</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel calendar-panel">
+      <div id="calendar"></div>
+    </section>
+
+    <aside class="sidebar">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Announcements</h2>
+        </div>
+        <div id="announcements-list" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Grades</h2>
+          <button id="add-grade-btn" class="btn btn-small">+ Add</button>
+        </div>
+        <div id="grades-list" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>To-dos</h2>
+        </div>
+        <form id="todo-form" class="inline-form">
+          <input type="text" id="todo-title" placeholder="Add a to-do..." required />
+          <input type="date" id="todo-date" />
+          <button type="submit" class="btn btn-small">Add</button>
+        </form>
+        <div id="todo-list" class="list"></div>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<dialog id="setup-modal" class="modal">
+  <form id="setup-form" class="modal-form">
+    <h2>Connect Canvas</h2>
+    <p class="muted">
+      Generate a token in Canvas under Account &rarr; Settings &rarr; New Access Token.
+      Stored locally in <code>data/config.json</code>, never sent anywhere but Canvas.
+    </p>
+    <label>
+      Canvas domain
+      <input type="text" id="canvas-domain" placeholder="canvas.stanford.edu" required />
+    </label>
+    <label>
+      Access token
+      <input type="password" id="canvas-token" required />
+    </label>
+    <p id="setup-error" class="error" hidden></p>
+    <div class="modal-actions">
+      <button type="button" id="setup-cancel" class="btn btn-ghost">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save &amp; Connect</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="grade-modal" class="modal">
+  <form id="grade-form" class="modal-form">
+    <h2 id="grade-modal-title">Add grade</h2>
+    <input type="hidden" id="grade-id" />
+    <label>
+      Course
+      <input type="text" id="grade-course" placeholder="CS 106B" required />
+    </label>
+    <label>
+      Item name
+      <input type="text" id="grade-item-name" placeholder="Midterm 1" required />
+    </label>
+    <label>
+      Type
+      <select id="grade-item-type">
+        <option value="assignment">Assignment</option>
+        <option value="quiz">Quiz</option>
+        <option value="midterm">Midterm</option>
+        <option value="final">Final</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+    <label>
+      Your score <span class="muted">(any format — 92%, 45/50, Check+...)</span>
+      <input type="text" id="grade-score" placeholder="leave blank if not graded yet" />
+    </label>
+    <label>
+      Class median <span class="muted">(optional)</span>
+      <input type="text" id="grade-median" placeholder="leave blank if not released" />
+    </label>
+    <label>
+      Comment <span class="muted">(optional)</span>
+      <textarea id="grade-comment" rows="2"></textarea>
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="grade-hidden" />
+      Hide this grade by default
+    </label>
+    <div class="modal-actions">
+      <button type="button" id="grade-delete" class="btn btn-danger" hidden>Delete</button>
+      <button type="button" id="grade-cancel" class="btn btn-ghost">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script type="module" src="/js/main.js"></script>
+</body>
+</html>

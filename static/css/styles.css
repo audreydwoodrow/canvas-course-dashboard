@@ -1,0 +1,210 @@
+/* ============================================================
+   THEME — edit these variables to restyle the whole dashboard
+   ============================================================ */
+:root {
+  --color-bg: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-border: #e3e5e9;
+  --color-text: #1c1e21;
+  --color-text-muted: #6b7280;
+  --color-accent: #4f46e5;
+  --color-accent-contrast: #ffffff;
+  --color-danger: #dc2626;
+  --color-todo-done: #9ca3af;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #16171a;
+    --color-surface: #1f2023;
+    --color-border: #2e3034;
+    --color-text: #f2f2f3;
+    --color-text-muted: #9a9ca3;
+    --color-accent: #818cf8;
+    --color-accent-contrast: #16171a;
+    --color-danger: #f87171;
+    --color-todo-done: #6b6d73;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1, h2, h3 { margin: 0; }
+
+.muted { color: var(--color-text-muted); font-size: 0.85em; }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.header-actions { display: flex; gap: var(--space-sm); }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+}
+
+.calendar-panel { min-height: 600px; }
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+/* ============================================================
+   BUTTONS & FORMS
+   ============================================================ */
+.btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.btn:hover { border-color: var(--color-accent); }
+.btn-ghost { background: transparent; }
+.btn-small { padding: 3px 9px; font-size: 0.8rem; }
+.btn-primary { background: var(--color-accent); color: var(--color-accent-contrast); border-color: var(--color-accent); }
+.btn-danger { background: transparent; color: var(--color-danger); border-color: var(--color-danger); margin-right: auto; }
+
+.inline-form {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.inline-form input[type="text"] { flex: 1; min-width: 0; }
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ============================================================
+   LISTS (announcements / grades / todos)
+   ============================================================ */
+.list { display: flex; flex-direction: column; gap: var(--space-sm); max-height: 340px; overflow-y: auto; }
+.list-empty { color: var(--color-text-muted); font-size: 0.85rem; padding: var(--space-sm) 0; }
+
+.item-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+}
+
+.item-card-title { font-weight: 600; font-size: 0.9rem; }
+.item-card-sub { color: var(--color-text-muted); font-size: 0.78rem; margin-top: 2px; }
+.item-card-body { font-size: 0.85rem; margin-top: var(--space-xs); }
+
+/* Grades */
+.grade-card { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-sm); cursor: pointer; }
+.grade-score { font-weight: 700; font-size: 1rem; white-space: nowrap; }
+.grade-median { color: var(--color-text-muted); font-size: 0.78rem; }
+.grade-hidden .grade-score, .grade-hidden .grade-median { filter: blur(6px); user-select: none; transition: filter 0.15s; }
+.grade-hidden:hover .grade-score, .grade-hidden:hover .grade-median { filter: blur(0); }
+
+/* Todos */
+.todo-card { display: flex; align-items: center; gap: var(--space-sm); }
+.todo-card.done .todo-title { text-decoration: line-through; color: var(--color-todo-done); }
+.todo-title { flex: 1; font-size: 0.88rem; }
+.todo-date { font-size: 0.75rem; color: var(--color-text-muted); }
+.todo-remove { background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1rem; line-height: 1; }
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+.modal {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  box-shadow: var(--shadow-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  width: min(420px, 90vw);
+}
+
+.modal::backdrop { background: rgba(0, 0, 0, 0.4); }
+
+.modal-form { display: flex; flex-direction: column; gap: var(--space-sm); padding: var(--space-lg); }
+
+.modal-form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
+.checkbox-label { flex-direction: row !important; align-items: center; gap: var(--space-xs) !important; }
+
+.modal-actions { display: flex; justify-content: flex-end; gap: var(--space-sm); margin-top: var(--space-sm); }
+
+.error { color: var(--color-danger); font-size: 0.85rem; }
+
+/* FullCalendar theming to match the palette */
+.fc { font-family: var(--font-sans); }
+.fc-theme-standard td, .fc-theme-standard th { border-color: var(--color-border); }
+.fc-theme-standard .fc-scrollgrid { border-color: var(--color-border); }
+.fc-toolbar-title { font-size: 1.1rem !important; color: var(--color-text); }
+.fc-button-primary { background: var(--color-accent) !important; border-color: var(--color-accent) !important; }
+.fc-daygrid-day-number, .fc-col-header-cell-cushion { color: var(--color-text); }
+.fc-day-today { background: color-mix(in srgb, var(--color-accent) 12%, transparent) !important; }
+.fc-event { cursor: pointer; }
