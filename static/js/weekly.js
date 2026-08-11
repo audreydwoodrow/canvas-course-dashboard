@@ -9,6 +9,15 @@ const DAY_LABELS = {
 
 const DAY_ORDER = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday"];
 
+// Explicit expand/collapse choices per task, kept across re-renders within the page session.
+// Tasks with no explicit choice default to expanded only if they already have subtasks.
+const expandState = new Map();
+
+function isExpanded(task) {
+  if (expandState.has(task.id)) return expandState.get(task.id);
+  return (task.subtasks || []).length > 0;
+}
+
 export function renderWeeklyView(els, data, handlers) {
   const { gridEl, horizonListEl, horizonFormEl, rangeEl } = els;
 
@@ -92,7 +101,6 @@ function buildTaskWrapper(task, handlers) {
   wrapper.className = "weekly-task dnd-item";
   wrapper.draggable = true;
   wrapper.dataset.id = task.id;
-  wrapper.appendChild(buildItemRow(task, handlers, false));
 
   const subList = document.createElement("div");
   subList.className = "weekly-subtask-list";
@@ -114,6 +122,25 @@ function buildTaskWrapper(task, handlers) {
   subList.appendChild(subForm);
   enableDragReorder(subList, handlers.onReorder);
 
+  const expanded = isExpanded(task);
+  subList.style.display = expanded ? "flex" : "none";
+
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "weekly-expand-toggle";
+  toggle.textContent = expanded ? "▾" : "▸";
+  toggle.title = "Show/hide subtasks";
+  toggle.addEventListener("click", () => {
+    const next = !isExpanded(task);
+    expandState.set(task.id, next);
+    subList.style.display = next ? "flex" : "none";
+    toggle.textContent = next ? "▾" : "▸";
+  });
+
+  const row = buildItemRow(task, handlers, false);
+  row.prepend(toggle);
+
+  wrapper.appendChild(row);
   wrapper.appendChild(subList);
   return wrapper;
 }

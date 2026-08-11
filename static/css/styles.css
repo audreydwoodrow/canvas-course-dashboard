@@ -292,7 +292,22 @@ input[type="checkbox"] {
 .weekly-item.done .weekly-item-title { text-decoration: line-through; color: var(--color-todo-done); }
 .weekly-item-title { flex: 1; font-size: 0.83rem; word-break: break-word; }
 
-/* Subtasks: indented, smaller, one level deep */
+.weekly-expand-toggle {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.65rem;
+  padding: 0 1px;
+  line-height: 1.6;
+  flex-shrink: 0;
+  width: 12px;
+  text-align: center;
+}
+
+.weekly-expand-toggle:hover { color: var(--color-accent); }
+
+/* Subtasks: indented, smaller, one level deep, hidden until expanded via the toggle */
 .weekly-subtask-list {
   margin: 4px 0 2px 14px;
   padding-left: 10px;
