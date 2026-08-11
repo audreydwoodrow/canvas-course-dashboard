@@ -34,4 +34,6 @@ export const api = {
   updateWeeklyTodo: (id, task) => request(`/api/weekly-todos/${id}`, { method: "PUT", body: JSON.stringify(task) }),
   deleteWeeklyTodo: (id) => request(`/api/weekly-todos/${id}`, { method: "DELETE" }),
   reorderWeeklyTodos: (ids) => request("/api/weekly-todos/reorder", { method: "PUT", body: JSON.stringify({ ids }) }),
+  moveWeeklyTodo: (id, day, ids) =>
+    request(`/api/weekly-todos/${id}/move`, { method: "PUT", body: JSON.stringify({ day, ids }) }),
 };

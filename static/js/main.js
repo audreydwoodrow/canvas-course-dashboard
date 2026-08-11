@@ -86,6 +86,10 @@ async function loadWeekly() {
       await api.reorderWeeklyTodos(ids);
       loadWeekly();
     },
+    onMove: async (taskId, day, ids) => {
+      await api.moveWeeklyTodo(taskId, day, ids);
+      loadWeekly();
+    },
   });
 }
 

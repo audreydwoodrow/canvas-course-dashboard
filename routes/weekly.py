@@ -111,6 +111,30 @@ def reorder_weekly_todos():
     return jsonify({"ok": True})
 
 
+@bp.put("/<int:task_id>/move")
+def move_weekly_todo(task_id):
+    body = request.get_json(force=True) or {}
+    day = (body.get("day") or "").strip().lower()
+    ids = body.get("ids") or []
+    if day not in BUCKETS:
+        return jsonify({"error": "day must be one of sunday-friday or horizon"}), 400
+
+    db = get_db()
+    row = db.execute("SELECT * FROM weekly_tasks WHERE id = ?", (task_id,)).fetchone()
+    if row is None:
+        return jsonify({"error": "not found"}), 404
+
+    week_start = None if day == "horizon" else current_week_start()
+    db.execute("UPDATE weekly_tasks SET day = ?, week_start = ? WHERE id = ?", (day, week_start, task_id))
+    # subtasks carry their own day/week_start (for sweep purposes) so they must move with the parent
+    db.execute("UPDATE weekly_tasks SET day = ?, week_start = ? WHERE parent_id = ?", (day, week_start, task_id))
+
+    for i, tid in enumerate(ids):
+        db.execute("UPDATE weekly_tasks SET position = ? WHERE id = ?", (i, tid))
+    db.commit()
+    return jsonify({"ok": True})
+
+
 @bp.put("/<int:task_id>")
 def update_weekly_todo(task_id):
     body = request.get_json(force=True) or {}

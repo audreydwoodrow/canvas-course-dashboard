@@ -25,22 +25,29 @@ export function renderWeeklyView(els, data, handlers) {
   const weekEnd = addDays(weekStart, 5);
   rangeEl.textContent = `Week of ${formatShort(weekStart)} – ${formatShort(weekEnd)}`;
 
+  const topLevelLists = [];
+
   gridEl.innerHTML = "";
   DAY_ORDER.forEach((day, i) => {
     const date = addDays(weekStart, i);
-    gridEl.appendChild(
-      buildColumn({
-        day,
-        title: DAY_LABELS[day],
-        subtitle: formatShort(date),
-        tasks: data.items[day] || [],
-        handlers,
-      })
-    );
+    const { col, list } = buildColumn({
+      day,
+      title: DAY_LABELS[day],
+      subtitle: formatShort(date),
+      tasks: data.items[day] || [],
+      handlers,
+    });
+    gridEl.appendChild(col);
+    topLevelLists.push(list);
   });
 
   renderTaskList(horizonListEl, data.items["horizon"] || [], handlers, true);
-  enableDragReorder(horizonListEl, handlers.onReorder);
+  horizonListEl.dataset.day = "horizon";
+  topLevelLists.push(horizonListEl);
+
+  // Day columns + Horizon share one drag system so a task can be dragged
+  // across any of them, not just reordered within its own list.
+  enableCrossListDrag(topLevelLists, handlers.onMove);
 
   horizonFormEl.onsubmit = (evt) => {
     evt.preventDefault();
@@ -78,11 +85,11 @@ function buildColumn({ day, title, subtitle, tasks, handlers }) {
 
   const list = document.createElement("div");
   list.className = "weekly-list";
+  list.dataset.day = day;
   renderTaskList(list, tasks, handlers, false);
   col.appendChild(list);
-  enableDragReorder(list, handlers.onReorder);
 
-  return col;
+  return { col, list };
 }
 
 function renderTaskList(container, tasks, handlers, isHorizon) {
@@ -212,6 +219,46 @@ function enableDragReorder(listEl, onReorder) {
     if (after == null) listEl.appendChild(draggingEl);
     else listEl.insertBefore(draggingEl, after);
   });
+}
+
+/* Drag system shared across every day column + Horizon, so a task can be
+   dragged out of its own list and dropped into a different day (or Horizon).
+   A single shared draggingEl means whichever list's dragover the pointer is
+   currently over can adopt the element; dragend fires on whatever list the
+   element actually ended up in (real DOM ancestry), reads that list's
+   data-day, and reports both the new day and the final order in that list. */
+function enableCrossListDrag(lists, onMove) {
+  let draggingEl = null;
+
+  for (const listEl of lists) {
+    listEl.addEventListener("dragstart", (e) => {
+      const item = e.target.closest(".dnd-item.weekly-task");
+      if (!item || item.parentElement !== listEl) return;
+      e.stopPropagation();
+      draggingEl = item;
+      requestAnimationFrame(() => item.classList.add("dragging"));
+    });
+
+    listEl.addEventListener("dragover", (e) => {
+      if (!draggingEl) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const after = getDragAfterElement(listEl, e.clientY);
+      if (after == null) listEl.appendChild(draggingEl);
+      else listEl.insertBefore(draggingEl, after);
+    });
+
+    listEl.addEventListener("dragend", (e) => {
+      if (!draggingEl || draggingEl.parentElement !== listEl) return;
+      e.stopPropagation();
+      draggingEl.classList.remove("dragging");
+      const ids = Array.from(listEl.querySelectorAll(":scope > .dnd-item")).map((el) => Number(el.dataset.id));
+      const taskId = Number(draggingEl.dataset.id);
+      const newDay = listEl.dataset.day;
+      draggingEl = null;
+      onMove(taskId, newDay, ids);
+    });
+  }
 }
 
 function getDragAfterElement(container, y) {

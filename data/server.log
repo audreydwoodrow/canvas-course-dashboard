@@ -623,3 +623,28 @@ Dashboard running at http://127.0.0.1:5050
  * Running on http://127.0.0.1:5050
 [33mPress CTRL+C to quit[0m
 127.0.0.1 - - [11/Aug/2026 15:13:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:12] "[35m[1mDELETE /api/weekly-todos/15 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:14:12] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:27] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:14:27] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:31] "[35m[1mPOST /api/weekly-todos HTTP/1.1[0m" 201 -
+127.0.0.1 - - [11/Aug/2026 15:14:31] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:33] "PUT /api/weekly-todos/reorder HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:33] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:35] "PUT /api/weekly-todos/reorder HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:35] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:36] "PUT /api/weekly-todos/reorder HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:36] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:38] "PUT /api/weekly-todos/reorder HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:38] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:39] "[35m[1mDELETE /api/weekly-todos/1 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:14:39] "GET /api/weekly-todos HTTP/1.1" 200 -
+127.0.0.1 - - [11/Aug/2026 15:14:39] "[35m[1mDELETE /api/weekly-todos/2 HTTP/1.1[0m" 204 -
+127.0.0.1 - - [11/Aug/2026 15:14:39] "GET /api/weekly-todos HTTP/1.1" 200 -
+Dashboard running at http://127.0.0.1:5050
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [11/Aug/2026 15:18:02] "GET / HTTP/1.1" 200 -
