@@ -1,7 +1,7 @@
 from flask import Flask
 
 from db import init_db
-from routes import announcements, calendar, grades, setup, todos, weekly
+from routes import announcements, calendar, events, grades, setup, todos, weekly
 
 HOST = "127.0.0.1"
 PORT = 5050
@@ -17,6 +17,7 @@ def create_app():
     app.register_blueprint(grades.bp)
     app.register_blueprint(todos.bp)
     app.register_blueprint(weekly.bp)
+    app.register_blueprint(events.bp)
 
     @app.route("/")
     def index():

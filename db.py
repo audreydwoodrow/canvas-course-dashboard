@@ -38,6 +38,20 @@ CREATE TABLE IF NOT EXISTS weekly_tasks (
     position INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+CREATE TABLE IF NOT EXISTS events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    date TEXT NOT NULL,
+    start_time TEXT,
+    end_time TEXT,
+    all_day INTEGER NOT NULL DEFAULT 0,
+    location TEXT,
+    notes TEXT,
+    repeat_freq TEXT NOT NULL DEFAULT 'none',
+    repeat_until TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
 """
 
 

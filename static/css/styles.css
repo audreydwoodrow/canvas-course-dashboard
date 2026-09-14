@@ -14,6 +14,8 @@
   --color-accent-contrast: #F4F1E8;
   --color-accent2: #767AAE;
   --color-accent2-contrast: #24221D;
+  --color-accent3: #C7A252;
+  --color-accent3-contrast: #24221D;
   --color-danger: #A0453F;
   --color-todo-done: #A6A499;
 
@@ -173,6 +175,9 @@ h1, h2, h3 {
 }
 
 .inline-form input[type="text"] { flex: 1; min-width: 0; }
+
+.inline-fields { display: flex; gap: var(--space-sm); }
+.inline-fields label { flex: 1; }
 
 input, select, textarea {
   font-family: var(--font-sans);
@@ -426,3 +431,11 @@ input[type="checkbox"] {
   border-color: var(--color-accent2) !important;
   color: var(--color-accent2-contrast) !important;
 }
+
+.fc-event-class {
+  background: var(--color-accent3) !important;
+  border-color: var(--color-accent3) !important;
+  color: var(--color-accent3-contrast) !important;
+}
+
+.fc-daygrid-day:hover { background: color-mix(in srgb, var(--color-accent3) 12%, transparent); cursor: pointer; }

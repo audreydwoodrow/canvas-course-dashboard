@@ -26,6 +26,10 @@
 
   <main id="calendar-view" class="layout tab-view">
     <section class="panel calendar-panel">
+      <div class="panel-header">
+        <h2>Calendar</h2>
+        <button id="add-event-btn" class="btn btn-small">+ Add event</button>
+      </div>
       <div id="calendar"></div>
     </section>
 
@@ -142,6 +146,60 @@
     <div class="modal-actions">
       <button type="button" id="grade-delete" class="btn btn-danger" hidden>Delete</button>
       <button type="button" id="grade-cancel" class="btn btn-ghost">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="event-modal" class="modal">
+  <form id="event-form" class="modal-form">
+    <h2 id="event-modal-title">Add event</h2>
+    <input type="hidden" id="event-id" />
+    <label>
+      Title
+      <input type="text" id="event-title" placeholder="CS 106B Lecture" required />
+    </label>
+    <label>
+      Date
+      <input type="date" id="event-date" required />
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="event-all-day" />
+      All day
+    </label>
+    <div id="event-time-fields" class="inline-fields">
+      <label>
+        Start time
+        <input type="time" id="event-start-time" />
+      </label>
+      <label>
+        End time
+        <input type="time" id="event-end-time" />
+      </label>
+    </div>
+    <label>
+      Location <span class="muted">(optional)</span>
+      <input type="text" id="event-location" placeholder="Gates B01" />
+    </label>
+    <label>
+      Notes <span class="muted">(optional)</span>
+      <textarea id="event-notes" rows="2"></textarea>
+    </label>
+    <label>
+      Repeats
+      <select id="event-repeat-freq">
+        <option value="none">Does not repeat</option>
+        <option value="weekly">Weekly</option>
+      </select>
+    </label>
+    <label id="event-repeat-until-field">
+      Repeat until
+      <input type="date" id="event-repeat-until" />
+    </label>
+    <p id="event-error" class="error" hidden></p>
+    <div class="modal-actions">
+      <button type="button" id="event-delete" class="btn btn-danger" hidden>Delete</button>
+      <button type="button" id="event-cancel" class="btn btn-ghost">Cancel</button>
       <button type="submit" class="btn btn-primary">Save</button>
     </div>
   </form>

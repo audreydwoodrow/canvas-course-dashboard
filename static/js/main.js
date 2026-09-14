@@ -12,13 +12,21 @@ const setupError = document.getElementById("setup-error");
 const gradeModal = document.getElementById("grade-modal");
 const gradeForm = document.getElementById("grade-form");
 
+const eventModal = document.getElementById("event-modal");
+const eventForm = document.getElementById("event-form");
+
 let calendar = null;
 
 async function loadCanvasData() {
   try {
     const events = await api.getEvents();
     if (calendar) setCalendarEvents(calendar, events);
-    else calendar = initCalendar(document.getElementById("calendar"), events);
+    else {
+      calendar = initCalendar(document.getElementById("calendar"), events, {
+        onDateClick: (dateStr) => openEventModal(null, dateStr),
+        onEventClick: (series) => openEventModal(series),
+      });
+    }
   } catch (e) {
     console.error("Failed to load calendar events", e);
   }
@@ -133,6 +141,83 @@ document.getElementById("grade-delete").addEventListener("click", async () => {
   if (id) await api.deleteGrade(id);
   gradeModal.close();
   loadGrades();
+});
+
+function updateEventFormVisibility() {
+  const allDay = document.getElementById("event-all-day").checked;
+  document.getElementById("event-time-fields").hidden = allDay;
+
+  const repeats = document.getElementById("event-repeat-freq").value !== "none";
+  document.getElementById("event-repeat-until-field").hidden = !repeats;
+}
+
+function openEventModal(series, dateStr) {
+  document.getElementById("event-error").hidden = true;
+  document.getElementById("event-modal-title").textContent = series ? "Edit event" : "Add event";
+  document.getElementById("event-id").value = series ? series.id : "";
+  document.getElementById("event-title").value = series ? series.title : "";
+  document.getElementById("event-date").value = series ? series.date : dateStr || "";
+  document.getElementById("event-all-day").checked = series ? series.all_day : false;
+  document.getElementById("event-start-time").value = series ? series.start_time || "" : "";
+  document.getElementById("event-end-time").value = series ? series.end_time || "" : "";
+  document.getElementById("event-location").value = series ? series.location || "" : "";
+  document.getElementById("event-notes").value = series ? series.notes || "" : "";
+  document.getElementById("event-repeat-freq").value = series ? series.repeat_freq : "none";
+  document.getElementById("event-repeat-until").value = series ? series.repeat_until || "" : "";
+  document.getElementById("event-delete").hidden = !series;
+  updateEventFormVisibility();
+  eventModal.showModal();
+}
+
+document.getElementById("add-event-btn").addEventListener("click", () => openEventModal(null));
+document.getElementById("event-cancel").addEventListener("click", () => eventModal.close());
+document.getElementById("event-all-day").addEventListener("change", updateEventFormVisibility);
+document.getElementById("event-repeat-freq").addEventListener("change", updateEventFormVisibility);
+
+eventForm.addEventListener("submit", async (evt) => {
+  evt.preventDefault();
+  const errorEl = document.getElementById("event-error");
+  errorEl.hidden = true;
+
+  const id = document.getElementById("event-id").value;
+  const allDay = document.getElementById("event-all-day").checked;
+  const repeatFreq = document.getElementById("event-repeat-freq").value;
+  const repeatUntil = document.getElementById("event-repeat-until").value;
+
+  if (repeatFreq === "weekly" && !repeatUntil) {
+    errorEl.textContent = "Pick a stop date for the repeat, or set it to \"Does not repeat\".";
+    errorEl.hidden = false;
+    return;
+  }
+
+  const payload = {
+    title: document.getElementById("event-title").value.trim(),
+    date: document.getElementById("event-date").value,
+    all_day: allDay,
+    start_time: allDay ? null : document.getElementById("event-start-time").value || null,
+    end_time: allDay ? null : document.getElementById("event-end-time").value || null,
+    location: document.getElementById("event-location").value.trim(),
+    notes: document.getElementById("event-notes").value.trim(),
+    repeat_freq: repeatFreq,
+    repeat_until: repeatFreq === "weekly" ? repeatUntil : null,
+  };
+
+  try {
+    if (id) await api.updateEvent(id, payload);
+    else await api.createEvent(payload);
+    eventModal.close();
+    loadCalendarOnly();
+  } catch (e) {
+    errorEl.textContent = e.message;
+    errorEl.hidden = false;
+  }
+});
+
+document.getElementById("event-delete").addEventListener("click", async () => {
+  const id = document.getElementById("event-id").value;
+  if (id) await api.deleteEvent(id);
+  eventModal.close();
+  loadCalendarOnly();
 });
 
 document.getElementById("todo-form").addEventListener("submit", async (evt) => {

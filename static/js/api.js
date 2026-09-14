@@ -19,6 +19,10 @@ export const api = {
   getEvents: () => request("/api/calendar/events"),
   getAnnouncements: () => request("/api/announcements"),
 
+  createEvent: (event) => request("/api/events", { method: "POST", body: JSON.stringify(event) }),
+  updateEvent: (id, event) => request(`/api/events/${id}`, { method: "PUT", body: JSON.stringify(event) }),
+  deleteEvent: (id) => request(`/api/events/${id}`, { method: "DELETE" }),
+
   getGrades: () => request("/api/grades"),
   createGrade: (grade) => request("/api/grades", { method: "POST", body: JSON.stringify(grade) }),
   updateGrade: (id, grade) => request(`/api/grades/${id}`, { method: "PUT", body: JSON.stringify(grade) }),

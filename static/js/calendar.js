@@ -1,4 +1,4 @@
-export function initCalendar(el, events) {
+export function initCalendar(el, events, { onDateClick, onEventClick } = {}) {
   const calendar = new window.FullCalendar.Calendar(el, {
     initialView: "dayGridMonth",
     height: 850,
@@ -12,7 +12,14 @@ export function initCalendar(el, events) {
       right: "dayGridMonth,timeGridWeek",
     },
     events: events.map(toFullCalendarEvent),
+    dateClick(info) {
+      if (onDateClick) onDateClick(info.dateStr);
+    },
     eventClick(info) {
+      if (info.event.extendedProps.source === "event") {
+        if (onEventClick) onEventClick(info.event.extendedProps.series);
+        return;
+      }
       if (info.event.url) {
         info.jsEvent.preventDefault();
         window.open(info.event.url, "_blank");
@@ -34,8 +41,30 @@ function toFullCalendarEvent(e) {
     title: e.source === "canvas" ? `${e.title} (${e.course})` : e.title,
     start: e.start,
     allDay: e.allDay,
-    classNames: [e.source === "todo" ? "fc-event-todo" : "fc-event-canvas"],
+    classNames: [classNameFor(e.source)],
+    extendedProps: { source: e.source },
   };
+  if (e.end) event.end = e.end;
   if (e.url) event.url = e.url;
+  if (e.source === "event") {
+    event.extendedProps.series = {
+      id: e.seriesId,
+      title: e.title,
+      date: e.seriesDate,
+      start_time: e.startTime,
+      end_time: e.endTime,
+      all_day: e.allDay,
+      location: e.location,
+      notes: e.notes,
+      repeat_freq: e.repeatFreq,
+      repeat_until: e.repeatUntil,
+    };
+  }
   return event;
+}
+
+function classNameFor(source) {
+  if (source === "todo") return "fc-event-todo";
+  if (source === "event") return "fc-event-class";
+  return "fc-event-canvas";
 }
