@@ -17,7 +17,9 @@ export function initCalendar(el, events, { onDateClick, onEventClick } = {}) {
     },
     eventClick(info) {
       if (info.event.extendedProps.source === "event") {
-        if (onEventClick) onEventClick(info.event.extendedProps.series);
+        if (onEventClick) {
+          onEventClick(info.event.extendedProps.series, info.event.extendedProps.occurrenceDate);
+        }
         return;
       }
       if (info.event.url) {
@@ -47,6 +49,7 @@ function toFullCalendarEvent(e) {
   if (e.end) event.end = e.end;
   if (e.url) event.url = e.url;
   if (e.source === "event") {
+    event.extendedProps.occurrenceDate = e.occurrenceDate;
     event.extendedProps.series = {
       id: e.seriesId,
       title: e.title,
@@ -58,6 +61,7 @@ function toFullCalendarEvent(e) {
       notes: e.notes,
       repeat_freq: e.repeatFreq,
       repeat_until: e.repeatUntil,
+      repeat_days: e.repeatDays || [],
     };
   }
   return event;

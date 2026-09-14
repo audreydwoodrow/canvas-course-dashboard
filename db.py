@@ -50,6 +50,8 @@ CREATE TABLE IF NOT EXISTS events (
     notes TEXT,
     repeat_freq TEXT NOT NULL DEFAULT 'none',
     repeat_until TEXT,
+    repeat_days TEXT,
+    excluded_dates TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 """
@@ -82,6 +84,8 @@ def init_db(app):
         conn.executescript(SCHEMA)
         _add_column_if_missing(conn, "weekly_tasks", "parent_id", "INTEGER")
         _add_column_if_missing(conn, "weekly_tasks", "position", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(conn, "events", "repeat_days", "TEXT")
+        _add_column_if_missing(conn, "events", "excluded_dates", "TEXT")
         conn.commit()
         conn.close()
     app.teardown_appcontext(close_db)

@@ -24,7 +24,7 @@ async function loadCanvasData() {
     else {
       calendar = initCalendar(document.getElementById("calendar"), events, {
         onDateClick: (dateStr) => openEventModal(null, dateStr),
-        onEventClick: (series) => openEventModal(series),
+        onEventClick: (series, occurrenceDate) => openEventModal(series, null, occurrenceDate),
       });
     }
   } catch (e) {
@@ -143,18 +143,39 @@ document.getElementById("grade-delete").addEventListener("click", async () => {
   loadGrades();
 });
 
+const WEEKDAY_CODES_BY_JS_DAY = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+
+function weekdayCodeForDate(dateStr) {
+  if (!dateStr) return null;
+  return WEEKDAY_CODES_BY_JS_DAY[new Date(`${dateStr}T00:00:00`).getDay()];
+}
+
+function repeatDayCheckboxes() {
+  return [...document.querySelectorAll("#event-repeat-days input[type=checkbox]")];
+}
+
+function ensureDefaultRepeatDay() {
+  const checkboxes = repeatDayCheckboxes();
+  if (checkboxes.some((cb) => cb.checked)) return;
+  const code = weekdayCodeForDate(document.getElementById("event-date").value);
+  const match = checkboxes.find((cb) => cb.value === code);
+  if (match) match.checked = true;
+}
+
 function updateEventFormVisibility() {
   const allDay = document.getElementById("event-all-day").checked;
   document.getElementById("event-time-fields").hidden = allDay;
 
   const repeats = document.getElementById("event-repeat-freq").value !== "none";
+  document.getElementById("event-repeat-days-field").hidden = !repeats;
   document.getElementById("event-repeat-until-field").hidden = !repeats;
 }
 
-function openEventModal(series, dateStr) {
+function openEventModal(series, dateStr, occurrenceDate) {
   document.getElementById("event-error").hidden = true;
   document.getElementById("event-modal-title").textContent = series ? "Edit event" : "Add event";
   document.getElementById("event-id").value = series ? series.id : "";
+  document.getElementById("event-occurrence-date").value = occurrenceDate || "";
   document.getElementById("event-title").value = series ? series.title : "";
   document.getElementById("event-date").value = series ? series.date : dateStr || "";
   document.getElementById("event-all-day").checked = series ? series.all_day : false;
@@ -164,7 +185,18 @@ function openEventModal(series, dateStr) {
   document.getElementById("event-notes").value = series ? series.notes || "" : "";
   document.getElementById("event-repeat-freq").value = series ? series.repeat_freq : "none";
   document.getElementById("event-repeat-until").value = series ? series.repeat_until || "" : "";
-  document.getElementById("event-delete").hidden = !series;
+
+  const selectedDays = series ? series.repeat_days || [] : [];
+  repeatDayCheckboxes().forEach((cb) => {
+    cb.checked = selectedDays.includes(cb.value);
+  });
+
+  const isRecurring = Boolean(series && series.repeat_freq === "weekly");
+  document.getElementById("event-delete-occurrence").hidden = !isRecurring;
+  const seriesDeleteBtn = document.getElementById("event-delete-series");
+  seriesDeleteBtn.hidden = !series;
+  seriesDeleteBtn.textContent = isRecurring ? "Delete entire series" : "Delete";
+
   updateEventFormVisibility();
   eventModal.showModal();
 }
@@ -172,7 +204,13 @@ function openEventModal(series, dateStr) {
 document.getElementById("add-event-btn").addEventListener("click", () => openEventModal(null));
 document.getElementById("event-cancel").addEventListener("click", () => eventModal.close());
 document.getElementById("event-all-day").addEventListener("change", updateEventFormVisibility);
-document.getElementById("event-repeat-freq").addEventListener("change", updateEventFormVisibility);
+document.getElementById("event-repeat-freq").addEventListener("change", () => {
+  updateEventFormVisibility();
+  if (document.getElementById("event-repeat-freq").value === "weekly") ensureDefaultRepeatDay();
+});
+document.getElementById("event-date").addEventListener("change", () => {
+  if (document.getElementById("event-repeat-freq").value === "weekly") ensureDefaultRepeatDay();
+});
 
 eventForm.addEventListener("submit", async (evt) => {
   evt.preventDefault();
@@ -183,9 +221,17 @@ eventForm.addEventListener("submit", async (evt) => {
   const allDay = document.getElementById("event-all-day").checked;
   const repeatFreq = document.getElementById("event-repeat-freq").value;
   const repeatUntil = document.getElementById("event-repeat-until").value;
+  const repeatDays = repeatDayCheckboxes()
+    .filter((cb) => cb.checked)
+    .map((cb) => cb.value);
 
   if (repeatFreq === "weekly" && !repeatUntil) {
     errorEl.textContent = "Pick a stop date for the repeat, or set it to \"Does not repeat\".";
+    errorEl.hidden = false;
+    return;
+  }
+  if (repeatFreq === "weekly" && repeatDays.length === 0) {
+    errorEl.textContent = "Pick at least one day of the week to repeat on.";
     errorEl.hidden = false;
     return;
   }
@@ -200,6 +246,7 @@ eventForm.addEventListener("submit", async (evt) => {
     notes: document.getElementById("event-notes").value.trim(),
     repeat_freq: repeatFreq,
     repeat_until: repeatFreq === "weekly" ? repeatUntil : null,
+    repeat_days: repeatFreq === "weekly" ? repeatDays : [],
   };
 
   try {
@@ -213,7 +260,15 @@ eventForm.addEventListener("submit", async (evt) => {
   }
 });
 
-document.getElementById("event-delete").addEventListener("click", async () => {
+document.getElementById("event-delete-occurrence").addEventListener("click", async () => {
+  const id = document.getElementById("event-id").value;
+  const occurrenceDate = document.getElementById("event-occurrence-date").value;
+  if (id && occurrenceDate) await api.deleteEventOccurrence(id, occurrenceDate);
+  eventModal.close();
+  loadCalendarOnly();
+});
+
+document.getElementById("event-delete-series").addEventListener("click", async () => {
   const id = document.getElementById("event-id").value;
   if (id) await api.deleteEvent(id);
   eventModal.close();

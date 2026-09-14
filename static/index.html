@@ -192,13 +192,27 @@
         <option value="weekly">Weekly</option>
       </select>
     </label>
+    <label id="event-repeat-days-field">
+      Repeat on
+      <div id="event-repeat-days" class="weekday-picker">
+        <label class="weekday-chip"><input type="checkbox" value="SU" />Su</label>
+        <label class="weekday-chip"><input type="checkbox" value="MO" />Mo</label>
+        <label class="weekday-chip"><input type="checkbox" value="TU" />Tu</label>
+        <label class="weekday-chip"><input type="checkbox" value="WE" />We</label>
+        <label class="weekday-chip"><input type="checkbox" value="TH" />Th</label>
+        <label class="weekday-chip"><input type="checkbox" value="FR" />Fr</label>
+        <label class="weekday-chip"><input type="checkbox" value="SA" />Sa</label>
+      </div>
+    </label>
     <label id="event-repeat-until-field">
       Repeat until
       <input type="date" id="event-repeat-until" />
     </label>
     <p id="event-error" class="error" hidden></p>
+    <input type="hidden" id="event-occurrence-date" />
     <div class="modal-actions">
-      <button type="button" id="event-delete" class="btn btn-danger" hidden>Delete</button>
+      <button type="button" id="event-delete-occurrence" class="btn btn-danger" hidden>Delete this date</button>
+      <button type="button" id="event-delete-series" class="btn btn-danger" hidden>Delete</button>
       <button type="button" id="event-cancel" class="btn btn-ghost">Cancel</button>
       <button type="submit" class="btn btn-primary">Save</button>
     </div>

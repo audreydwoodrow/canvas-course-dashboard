@@ -259,9 +259,30 @@ input[type="checkbox"] {
 .modal-form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
 .checkbox-label { flex-direction: row !important; align-items: center; gap: var(--space-xs) !important; }
 
-.modal-actions { display: flex; justify-content: flex-end; gap: var(--space-sm); margin-top: var(--space-sm); }
+.modal-actions { display: flex; justify-content: flex-end; gap: var(--space-sm); margin-top: var(--space-sm); flex-wrap: wrap; }
 
 .error { color: var(--color-danger); font-size: 0.85rem; font-weight: 600; }
+
+.weekday-picker { display: flex; flex-direction: row !important; gap: var(--space-xs); }
+.weekday-chip {
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0 !important;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  user-select: none;
+}
+.weekday-chip:has(input:checked) {
+  background: var(--color-accent3);
+  color: var(--color-accent3-contrast);
+}
+.weekday-chip input { position: absolute; opacity: 0; pointer-events: none; }
 
 /* ============================================================
    WEEKLY TO-DOS

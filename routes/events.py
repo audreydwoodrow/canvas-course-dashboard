@@ -1,6 +1,9 @@
+from datetime import date as date_cls
+
 from flask import Blueprint, jsonify, request
 
 from db import get_db
+from recurrence import WEEKDAY_CODES, format_dates, format_days, parse_dates, parse_days
 
 bp = Blueprint("events", __name__, url_prefix="/api/events")
 
@@ -17,6 +20,8 @@ def _row_to_dict(row):
         "notes": row["notes"],
         "repeat_freq": row["repeat_freq"],
         "repeat_until": row["repeat_until"],
+        "repeat_days": parse_days(row["repeat_days"]),
+        "excluded_dates": sorted(parse_dates(row["excluded_dates"])),
     }
 
 
@@ -40,10 +45,16 @@ def create_event():
         return jsonify({"error": "repeat_freq must be 'none' or 'weekly'"}), 400
     repeat_until = body.get("repeat_until") if repeat_freq == "weekly" else None
 
+    repeat_days = None
+    if repeat_freq == "weekly":
+        days = body.get("repeat_days") or [WEEKDAY_CODES[date_cls.fromisoformat(date).weekday()]]
+        repeat_days = format_days(days)
+
     db = get_db()
     cur = db.execute(
-        """INSERT INTO events (title, date, start_time, end_time, all_day, location, notes, repeat_freq, repeat_until)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        """INSERT INTO events (title, date, start_time, end_time, all_day, location, notes,
+                                repeat_freq, repeat_until, repeat_days)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         (
             title,
             date,
@@ -54,6 +65,7 @@ def create_event():
             body.get("notes"),
             repeat_freq,
             repeat_until,
+            repeat_days,
         ),
     )
     db.commit()
@@ -76,8 +88,11 @@ def update_event(event_id):
     updates = {f: body[f] for f in fields if f in body}
     if "all_day" in body:
         updates["all_day"] = 1 if body["all_day"] else 0
+    if "repeat_days" in body:
+        updates["repeat_days"] = format_days(body["repeat_days"])
     if updates.get("repeat_freq") == "none":
         updates["repeat_until"] = None
+        updates["repeat_days"] = None
 
     if updates:
         set_clause = ", ".join(f"{k} = ?" for k in updates)
@@ -90,7 +105,33 @@ def update_event(event_id):
 
 @bp.delete("/<int:event_id>")
 def delete_event(event_id):
+    """Delete the entire series (or the one-off event, which is the same thing)."""
     db = get_db()
     db.execute("DELETE FROM events WHERE id = ?", (event_id,))
+    db.commit()
+    return "", 204
+
+
+@bp.delete("/<int:event_id>/occurrences/<occ_date>")
+def delete_event_occurrence(event_id, occ_date):
+    """Remove a single occurrence from a repeating series without touching the rest."""
+    db = get_db()
+    row = db.execute("SELECT * FROM events WHERE id = ?", (event_id,)).fetchone()
+    if row is None:
+        return jsonify({"error": "not found"}), 404
+
+    if row["repeat_freq"] != "weekly":
+        # Not a repeating series — there's only ever one occurrence, so this
+        # is the same as deleting the whole event.
+        db.execute("DELETE FROM events WHERE id = ?", (event_id,))
+        db.commit()
+        return "", 204
+
+    excluded = parse_dates(row["excluded_dates"])
+    excluded.add(occ_date)
+    db.execute(
+        "UPDATE events SET excluded_dates = ? WHERE id = ?",
+        (format_dates(excluded), event_id),
+    )
     db.commit()
     return "", 204
